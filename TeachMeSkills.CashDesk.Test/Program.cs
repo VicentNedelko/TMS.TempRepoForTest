@@ -17,23 +17,8 @@ namespace TeachMeSkills.CashDesk.Test
             CustomerManager customerManager = new CustomerManager();
             customerManager.commonQueueThread.Start();
 
+            // Fill the cashDeskQueue with Customers
 
-            //// Create Threads for all CashDesks
-            ////
-            //List<Thread> cashDeskThreadsList = new List<Thread>();
-            //for(int t = 0; t < cashDeskNumber; t++)
-            //{
-            //    cashDeskThreadsList.Add(new Thread(
-            //        () => cashDeskManager.cashDeskList[t].Service())
-            //        );
-            //    Console.WriteLine($"Thread {t} added.");
-            //    cashDeskThreadsList[t].Name = "Cash Desk" + (t + 1).ToString();
-            //}
-            ////
-            ////
-            ///
-
-            Thread.Sleep(4000);
             foreach(CashDesk cashDesk in cashDeskManager.cashDeskList)
             {
                 cashDesk.cashDeskThread.Start();

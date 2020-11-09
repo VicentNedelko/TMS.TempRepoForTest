@@ -33,8 +33,9 @@ namespace TeachMeSkills.CashDesk.Test
         {
             while(cashDeskQueue.Count > 0)
             {
+                
                 semaphore.WaitOne();
-                Thread.Sleep(cashDeskQueue.Peek().Basket.Count * 100);
+                Thread.Sleep(cashDeskQueue.Peek().Basket.Count * 200);
                 cashDeskQueue.Dequeue();
                 semaphore.Release();
             }
