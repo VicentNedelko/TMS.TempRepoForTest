@@ -8,7 +8,7 @@ namespace TeachMeSkills.CashDesk.Test
     public class CustomerManager
     {
 
-        public int maxCustomerNumber { get; set; } = 10;
+        public int maxCustomerNumber { get; set; } = 20;
         Random rand = new Random();
         public Queue<Customer> commonQueue;
         public Thread commonQueueThread;

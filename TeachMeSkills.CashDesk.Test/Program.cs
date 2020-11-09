@@ -18,13 +18,13 @@ namespace TeachMeSkills.CashDesk.Test
             customerManager.commonQueueThread.Start();
 
             // Make a short pause to generate Customers in common Queue
-            Thread.Sleep(2000);
+            Thread.Sleep(200);
 
             // Start Cash Desk Threads - Cash Desks start working
 
             foreach (CashDesk cashDesk in cashDeskManager.cashDeskList)
             {
-                Console.WriteLine($"Common Queue - {customerManager.maxCustomerNumber}");
+                Console.WriteLine($"Common Queue Max - {customerManager.maxCustomerNumber}");
                 cashDesk.maxCustomerNumber = customerManager.maxCustomerNumber;
                 cashDesk.cashDeskThread.Start();
                 Console.WriteLine($"Thread CashDesk started.");
@@ -49,6 +49,7 @@ namespace TeachMeSkills.CashDesk.Test
                     Thread.Sleep(1000);
                 }
             }
+            Console.WriteLine("Finished.");
 
 
             int GetShortestQueue()
