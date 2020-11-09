@@ -31,7 +31,7 @@ namespace TeachMeSkills.CashDesk.Test
             }
 
             // Fill the cashDeskQueue with Customers
-            while (customerManager.maxCustomerNumber > 0)
+            while (customerManager.maxCustomerNumber > 0 || customerManager.commonQueue.Count > 0)
             {
                 if(customerManager.commonQueue.Count > 0)
                 {

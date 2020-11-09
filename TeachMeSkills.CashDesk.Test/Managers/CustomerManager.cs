@@ -22,7 +22,7 @@ namespace TeachMeSkills.CashDesk.Test
         {
             while (maxCustomerNumber > 0)
             {
-                Thread.Sleep(rand.Next(1000, 2000));
+                Thread.Sleep(rand.Next(100, 1000));
                 Console.WriteLine("New Customer generated.");
                 commonQueue.Enqueue(new Customer());
                 maxCustomerNumber--;
