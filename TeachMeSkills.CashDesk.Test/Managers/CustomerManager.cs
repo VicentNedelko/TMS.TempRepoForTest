@@ -7,9 +7,11 @@ namespace TeachMeSkills.CashDesk.Test
 {
     public class CustomerManager
     {
-        public int maxCustomerNumber = 10;
+
+        public int maxCustomerNumber { get; set; } = 10;
         Random rand = new Random();
         public Queue<Customer> commonQueue;
+        public Thread commonQueueThread;
 
         public CustomerManager()
         {
@@ -20,6 +22,7 @@ namespace TeachMeSkills.CashDesk.Test
         {
             while (maxCustomerNumber > 0)
             {
+                Thread.Sleep(rand.Next(1000, 2000));
                 Console.WriteLine("New Customer generated.");
                 commonQueue.Enqueue(new Customer());
                 maxCustomerNumber--;

@@ -9,6 +9,7 @@ namespace TeachMeSkills.CashDesk.Test
     public class CashDesk
     {
         public Speed Speed { get; set; }
+        public int maxCustomerNumber { get; set; }
         public Queue<Customer> cashDeskQueue { get; set; }
         public Thread cashDeskThread { get; set; }
         private static Semaphore semaphore = new Semaphore(0, 5);
@@ -31,13 +32,20 @@ namespace TeachMeSkills.CashDesk.Test
         }
         public void Service()
         {
-            while(cashDeskQueue.Count > 0)
+            while(maxCustomerNumber > 0 || cashDeskQueue.Count > 0)
             {
-                
-                semaphore.WaitOne();
-                Thread.Sleep(cashDeskQueue.Peek().Basket.Count * 200);
-                cashDeskQueue.Dequeue();
-                semaphore.Release();
+                if (cashDeskQueue.Count > 0)
+                {
+                    semaphore.WaitOne();
+                    Thread.Sleep(cashDeskQueue.Peek().Basket.Count * 200);
+                    Console.WriteLine("Customer served -----");
+                    cashDeskQueue.Dequeue();
+                    semaphore.Release();
+                }
+                else
+                {
+                    Thread.Sleep(1000);
+                }
             }
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("SERVICE FINISHED");

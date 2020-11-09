@@ -17,15 +17,38 @@ namespace TeachMeSkills.CashDesk.Test
             CustomerManager customerManager = new CustomerManager();
             customerManager.commonQueueThread.Start();
 
-            // Fill the cashDeskQueue with Customers
+            // Make a short pause to generate Customers in common Queue
+            Thread.Sleep(2000);
 
-            foreach(CashDesk cashDesk in cashDeskManager.cashDeskList)
+            // Start Cash Desk Threads - Cash Desks start working
+
+            foreach (CashDesk cashDesk in cashDeskManager.cashDeskList)
             {
+                Console.WriteLine($"Common Queue - {customerManager.maxCustomerNumber}");
+                cashDesk.maxCustomerNumber = customerManager.maxCustomerNumber;
                 cashDesk.cashDeskThread.Start();
                 Console.WriteLine($"Thread CashDesk started.");
             }
 
-
+            // Fill the cashDeskQueue with Customers
+            while (customerManager.maxCustomerNumber > 0)
+            {
+                if(customerManager.commonQueue.Count > 0)
+                {
+                    cashDeskManager.cashDeskList[GetShortestQueue()].
+                        cashDeskQueue.Enqueue(customerManager.commonQueue.Dequeue());
+                    for (int c = 0; c < cashDeskManager.cashDeskList.Count; c++)
+                    {
+                        cashDeskManager.cashDeskList[c].maxCustomerNumber
+                            = customerManager.maxCustomerNumber;
+                    }
+                    Console.WriteLine("Add Customer from COMMON to CASHDESK.");
+                }
+                else
+                {
+                    Thread.Sleep(1000);
+                }
+            }
 
 
             int GetShortestQueue()
