@@ -27,7 +27,9 @@ namespace TeachMeSkills.CashDesk.Test
                 Console.WriteLine($"Common Queue Max - {customerManager.maxCustomerNumber}");
                 cashDesk.maxCustomerNumber = customerManager.maxCustomerNumber;
                 cashDesk.cashDeskThread.Start();
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"Thread CashDesk started.");
+                Console.ForegroundColor = ConsoleColor.White;
             }
 
             // Fill the cashDeskQueue with Customers
@@ -42,7 +44,7 @@ namespace TeachMeSkills.CashDesk.Test
                         cashDeskManager.cashDeskList[c].maxCustomerNumber
                             = customerManager.maxCustomerNumber;
                     }
-                    Console.WriteLine("Add Customer from COMMON to CASHDESK.");
+                    Console.WriteLine($"Add Customer from COMMON to CASHDESK {GetShortestQueue() + 1}");
                 }
                 else
                 {
@@ -51,7 +53,7 @@ namespace TeachMeSkills.CashDesk.Test
             }
             Console.WriteLine("Finished.");
 
-
+            // Internal method
             int GetShortestQueue()
             {
                 int len = cashDeskManager.cashDeskList[0].cashDeskQueue.Count();

@@ -36,11 +36,11 @@ namespace TeachMeSkills.CashDesk.Test
             {
                 if (cashDeskQueue.Count > 0)
                 {
-                    semaphore.WaitOne();
+                    //semaphore.WaitOne();
                     Thread.Sleep(cashDeskQueue.Peek().Basket.Count * 200);
                     Console.WriteLine("Customer served -----");
                     cashDeskQueue.Dequeue();
-                    semaphore.Release();
+                    //semaphore.Release();
                 }
                 else
                 {
