@@ -13,9 +13,11 @@ namespace TeachMeSkills.CashDesk.Test
         public Queue<Customer> cashDeskQueue { get; set; }
         public Thread cashDeskThread { get; set; }
         private static Semaphore semaphore = new Semaphore(0, 5);
+        public List<TimeSpan> servingTime { get; set; }
         public CashDesk()
         {
             cashDeskQueue = new Queue<Customer>();
+            servingTime = new List<TimeSpan>();
             switch (new Random().Next(1, 3))
             {
                 case 1:
@@ -32,15 +34,18 @@ namespace TeachMeSkills.CashDesk.Test
         }
         public void Service()
         {
+            DateTime startTime;
+            DateTime finishTime;
             while(maxCustomerNumber > 0 || cashDeskQueue.Count > 0)
             {
                 if (cashDeskQueue.Count > 0)
                 {
-                    //semaphore.WaitOne();
-                    Thread.Sleep(cashDeskQueue.Peek().Basket.Count * 200);
-                    Console.WriteLine("Customer served -----");
+                    startTime = DateTime.Now;
+                    Thread.Sleep(cashDeskQueue.Peek().Basket.Count * 1000);
+                    finishTime = DateTime.Now;
+                    servingTime.Add(finishTime - startTime);
+                    Console.WriteLine($"Customer served in {(finishTime - startTime).TotalSeconds} sec");
                     cashDeskQueue.Dequeue();
-                    //semaphore.Release();
                 }
                 else
                 {

@@ -51,7 +51,10 @@ namespace TeachMeSkills.CashDesk.Test
                     Thread.Sleep(1000);
                 }
             }
-            Console.WriteLine("Finished.");
+            Console.WriteLine("Common Queue is empty.");
+            Console.WriteLine();
+            Console.WriteLine("---------");
+
 
             // Internal method
             int GetShortestQueue()

@@ -22,7 +22,7 @@ namespace TeachMeSkills.CashDesk.Test
         {
             while (maxCustomerNumber > 0)
             {
-                Thread.Sleep(rand.Next(100, 1000));
+                Thread.Sleep(rand.Next(1000, 3000));
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("New Customer generated.");
                 Console.ForegroundColor = ConsoleColor.White;
